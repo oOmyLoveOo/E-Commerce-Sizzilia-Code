@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import type { ReactElement } from "react"; // Importación type-only
 import Lenis from "lenis";
 import { HashRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 import { CartProvider } from './providers/CartProvider';
@@ -13,7 +14,6 @@ import Novelty from "./pages/Novelty";
 import Policies from "./pages/Policies";
 import Admin from "./pages/Admin";
 import ProductDetail from "./components/ProductDetail";
-import type { ReactElement } from "react"; // Importación añadida
 
 // Componente para scroll al top al cambiar de ruta
 const ScrollToTop = () => {
@@ -28,7 +28,7 @@ const ScrollToTop = () => {
 
 // Definición de tipos para las props de ProtectedRoute
 interface ProtectedRouteProps {
-  children: ReactElement; // Usamos ReactElement en lugar de JSX.Element
+  children: ReactElement;
 }
 
 function AppWrapper() {
