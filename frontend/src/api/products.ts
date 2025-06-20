@@ -1,5 +1,5 @@
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://your-production-url.com' 
+  ? import.meta.env.VITE_API_URL 
   : 'http://localhost:5000';
 
 // Define el tipo Product primero
