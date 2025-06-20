@@ -1,39 +1,45 @@
 "use client";
-
 import { useEffect } from "react";
 import Lenis from "lenis";
-import { Route, Routes } from "react-router-dom"
-import Home from "./pages/Home"
-import Products from "./pages/Products"
-import Navbar from "./components/Navbar"
-import Footer from "./components/Footer"
-import About from "./pages/About"
-import Contact from "./pages/Contact"
-import Novelty from "./pages/Novelty"
+import { Route, Routes } from "react-router-dom";
+import { CartProvider } from './providers/CartProvider';
+import Home from "./pages/Home";
+import Products from "./pages/Products";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Novelty from "./pages/Novelty";
+import Policies from "./pages/Policies";
+import Admin from "./pages/Admin";
+import ProductDetail from "./components/ProductDetail";
 
 function App() {
-      useEffect(() => {
-        const lenis = new Lenis();
-        const raf = (time: number) => {
-          lenis.raf(time);
-          requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
-    }, []);
+  useEffect(() => {
+    const lenis = new Lenis();
+    const raf = (time: number) => {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+  }, []);
 
   return (
-    <div>
+    <CartProvider>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Products" element={<Products />}/>
-        <Route path="/About" element={<About />} />
-        <Route path="/Contact" element={<Contact />} />
-        <Route path="/Novelty" element={<Novelty />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/novelty" element={<Novelty />} />
+        <Route path="/policies" element={<Policies />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/products/:id" element={<ProductDetail />} />
       </Routes>
       <Footer />
-    </div>
-  )
+    </CartProvider>
+  );
 }
 
-export default App
+export default App;
