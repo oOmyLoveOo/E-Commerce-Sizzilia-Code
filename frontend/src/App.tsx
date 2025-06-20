@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import type { ReactElement } from "react"; // Importación type-only
+import type { ReactElement } from "react";
 import Lenis from "lenis";
 import { HashRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 import { CartProvider } from './providers/CartProvider';
@@ -31,9 +31,9 @@ interface ProtectedRouteProps {
   children: ReactElement;
 }
 
-function AppWrapper() {
+const App = () => {
+  // Configuración de Lenis para smooth scrolling
   useEffect(() => {
-    // Configuración de Lenis para smooth scrolling
     const lenis = new Lenis({
       lerp: 0.1,
       smoothWheel: true
@@ -45,9 +45,7 @@ function AppWrapper() {
     };
     requestAnimationFrame(raf);
 
-    return () => {
-      lenis.destroy();
-    };
+    return () => lenis.destroy();
   }, []);
 
   return (
@@ -77,14 +75,14 @@ function AppWrapper() {
       </CartProvider>
     </Router>
   );
-}
+};
 
 // Componente de protección de ruta
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const checkAuth = async () => {
+    const checkAuth = () => {
       const adminPassword = localStorage.getItem('admin-auth');
       if (adminPassword === import.meta.env.VITE_ADMIN_PASSWORD) {
         setIsAuthenticated(true);
@@ -131,4 +129,4 @@ const NotFound = () => (
   </div>
 );
 
-export default AppWrapper;
+export default App;
